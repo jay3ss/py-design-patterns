@@ -10,6 +10,9 @@ class State(abc.ABC):
     Abstract base class for states
     """
 
+    def __init__(self) -> None:
+        self._instance = None
+
     @abc.abstractmethod
     def handle_event(self, command: str) -> 'State':
         method = None
@@ -23,26 +26,26 @@ class State(abc.ABC):
 
         return state
 
-    @abc.abstractmethod
+    @abc.abstractstaticmethod
     def close(self) -> 'State':
         pass
 
-    @abc.abstractmethod
+    @abc.abstractstaticmethod
     def combination(self) -> 'State':
         pass
 
-    @abc.abstractmethod
+    @abc.abstractstaticmethod
     def error(self) -> 'State':
         pass
 
-    @abc.abstractmethod
+    @abc.abstractstaticmethod
     def lock(self) -> 'State':
         pass
 
-    @abc.abstractmethod
+    @abc.abstractstaticmethod
     def open(self) -> 'State':
         pass
 
-    @abc.abstractmethod
+    @abc.abstractstaticmethod
     def unlock(self) -> 'State':
         pass
