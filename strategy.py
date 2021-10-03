@@ -81,13 +81,15 @@ class Context:
         """
         Filters out the text from a file using the given strategy
         """
+        chars_to_strip = ':,.\n'
         # go through each word in the file and if the word passes the check,
         # then pass it to the callback
         with open(filename, 'r') as file:
             for line in file:
                 for word in line.split(' '):
-                    if self._strategy.check(word):
-                        self._callback(word)
+                    stripped_word = word.strip(chars_to_strip)
+                    if self._strategy.check(stripped_word):
+                        self._callback(stripped_word)
 
 
 class StrategyPattern:
