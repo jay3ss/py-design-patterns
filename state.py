@@ -49,3 +49,42 @@ class State(abc.ABC):
     @abc.abstractstaticmethod
     def unlock(self) -> 'State':
         pass
+
+
+class AwaitingCombination(State):
+
+    def enter(self) -> 'State':
+        if self._instance is None:
+            self._instance = AwaitingCombination()
+
+        return self._instance
+
+    def combination(self) -> 'State':
+        return Closed.enter()
+
+    def error(self):
+        return Locked.enter()
+
+    def close(self) -> 'State':
+        return super().close()
+
+    def lock(self) -> 'State':
+        return super().lock()
+
+    def open(self) -> 'State':
+        return super().open()
+
+    def unlock(self) -> 'State':
+        return super().unlock()
+
+
+class Closed(State):
+    pass
+
+
+class Locked(State):
+    pass
+
+
+class Opened(State):
+    pass
