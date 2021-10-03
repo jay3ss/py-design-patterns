@@ -105,7 +105,30 @@ class Closed(State):
 
 
 class Locked(State):
-    pass
+
+    def enter(self) -> 'State':
+        if self._instance is None:
+            self._instance = Locked()
+
+        return self._instance
+
+    def combination(self) -> 'State':
+        return Closed.enter()
+
+    def error(self) -> 'State':
+        return Locked.enter()
+
+    def close(self) -> 'State':
+        pass
+
+    def lock(self) -> 'State':
+        return Locked.enter()
+
+    def open(self) -> 'State':
+        return Opened.enter()
+
+    def unlock(self) -> 'State':
+        return AwaitingCombination.enter()
 
 
 class Opened(State):
