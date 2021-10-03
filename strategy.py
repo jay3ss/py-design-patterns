@@ -67,8 +67,8 @@ class Palindrome(CheckStrategy):
 
 
 class Context:
-    def __init__(self, strategy=All, callback=print) -> None:
-        self._strategy = None
+    def __init__(self, strategy=All(), callback=print) -> None:
+        self._strategy = strategy
         self._callback = callback
 
     def change_strategy(self, strategy: CheckStrategy) -> None:
