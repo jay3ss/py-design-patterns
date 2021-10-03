@@ -31,7 +31,7 @@ class DirectoryListing:
 
 
     @staticmethod
-    def create_directory_listing(path: str):
+    def create_directory_listing(path: str) -> 'DirectoryListing':
         dl = DirectoryListing._pool.get(path)
 
         if dl is None:
