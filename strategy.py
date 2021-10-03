@@ -88,3 +88,31 @@ class Context:
                 for word in line.split(' '):
                     if self._strategy.check(word):
                         self._callback(word)
+
+
+class StrategyPattern:
+    """
+    Runs the strategies
+    """
+
+    def run(self):
+        """
+        Use each of the strategies on the file
+        """
+        context = Context()
+        filename = 'foo.txt'
+
+        print('\nDefault:')
+        context.filter(filename)
+
+        print('\nStarts with "t":')
+        context.change_strategy(StartsWithT())
+        context.filter(filename)
+
+        print('\nLonger than 5:')
+        context.change_strategy(LongerThan5())
+        context.filter(filename)
+
+        print('\nPalindromes:')
+        context.change_strategy(Palindrome())
+        context.filter(filename)
