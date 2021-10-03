@@ -67,4 +67,24 @@ class Palindrome(CheckStrategy):
 
 
 class Context:
-    pass
+    def __init__(self, callback=print) -> None:
+        self._strategy = None
+        self._callback = callback
+
+    def change_strategy(self, strategy: CheckStrategy) -> None:
+        """
+        Changes the strategy used to filter files
+        """
+        self._strategy = strategy
+
+    def filter(self, filename: str) -> None:
+        """
+        Filters out the text from a file using the given strategy
+        """
+        # go through each word in the file and if the word passes the check,
+        # then pass it to the callback
+        with open(filename, 'r') as file:
+            for line in file:
+                for word in line.split(' '):
+                    if self._strategy.check(word):
+                        self._callback(word)
