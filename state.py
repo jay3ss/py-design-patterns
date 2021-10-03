@@ -156,3 +156,16 @@ class Opened(State):
 
     def unlock(self) -> 'State':
         pass
+
+
+class Context:
+    def __init__(self) -> None:
+        self._state = Closed.enter()
+
+    def handle_event(self, command):
+        old_state = self._state
+        self._state = self._state.handle_event(command)
+
+        if not old_state == self._state:
+            state_name = type(self._state).__name__
+            print(f'\tChanged state to: {state_name}')
