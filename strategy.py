@@ -116,3 +116,8 @@ class StrategyPattern:
         print('\nPalindromes:')
         context.change_strategy(Palindrome())
         context.filter(filename)
+
+
+if __name__ == '__main__':
+    sp = StrategyPattern()
+    sp.run()
