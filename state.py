@@ -61,20 +61,20 @@ class AwaitingCombination(State):
     def combination(self) -> 'State':
         return Closed.enter()
 
-    def error(self):
+    def error(self) -> 'State':
         return Locked.enter()
 
     def close(self) -> 'State':
-        return super().close()
+        pass
 
     def lock(self) -> 'State':
-        return super().lock()
+        pass
 
     def open(self) -> 'State':
-        return super().open()
+        pass
 
     def unlock(self) -> 'State':
-        return super().unlock()
+        pass
 
 
 class Closed(State):
