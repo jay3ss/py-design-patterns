@@ -113,19 +113,19 @@ class Locked(State):
         return self._instance
 
     def combination(self) -> 'State':
-        return Closed.enter()
+        pass
 
     def error(self) -> 'State':
-        return Locked.enter()
+        pass
 
     def close(self) -> 'State':
         pass
 
     def lock(self) -> 'State':
-        return Locked.enter()
+        pass
 
     def open(self) -> 'State':
-        return Opened.enter()
+        pass
 
     def unlock(self) -> 'State':
         return AwaitingCombination.enter()
