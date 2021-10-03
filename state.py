@@ -132,4 +132,27 @@ class Locked(State):
 
 
 class Opened(State):
-    pass
+
+    def enter(self) -> 'State':
+        if self._instance is None:
+            self._instance = Opened()
+
+        return self._instance
+
+    def combination(self) -> 'State':
+        return Closed.enter()
+
+    def error(self) -> 'State':
+        pass
+
+    def close(self) -> 'State':
+        return Closed.enter()
+
+    def lock(self) -> 'State':
+        pass
+
+    def open(self) -> 'State':
+        pass
+
+    def unlock(self) -> 'State':
+        pass
