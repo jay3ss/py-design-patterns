@@ -86,10 +86,10 @@ class Closed(State):
         return self._instance
 
     def combination(self) -> 'State':
-        return Closed.enter()
+        pass
 
     def error(self) -> 'State':
-        return Locked.enter()
+        pass
 
     def close(self) -> 'State':
         pass
