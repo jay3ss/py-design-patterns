@@ -13,7 +13,6 @@ class State(abc.ABC):
     def __init__(self) -> None:
         self._instance = None
 
-    @abc.abstractmethod
     def handle_event(self, command: str) -> 'State':
         method = None
         state = self
