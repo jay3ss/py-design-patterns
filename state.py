@@ -10,8 +10,7 @@ class State(abc.ABC):
     Abstract base class for states
     """
 
-    def __init__(self) -> None:
-        self._instance = None
+    _instance = None
 
     def handle_event(self, command: str) -> 'State':
         method = None
@@ -26,135 +25,135 @@ class State(abc.ABC):
         return state
 
     @abc.abstractstaticmethod
-    def close(self) -> 'State':
+    def close() -> 'State':
         pass
 
     @abc.abstractstaticmethod
-    def combination(self) -> 'State':
+    def combination() -> 'State':
         pass
 
     @abc.abstractstaticmethod
-    def error(self) -> 'State':
+    def error() -> 'State':
         pass
 
     @abc.abstractstaticmethod
-    def lock(self) -> 'State':
+    def lock() -> 'State':
         pass
 
     @abc.abstractstaticmethod
-    def open(self) -> 'State':
+    def open() -> 'State':
         pass
 
     @abc.abstractstaticmethod
-    def unlock(self) -> 'State':
+    def unlock() -> 'State':
         pass
 
 
 class AwaitingCombination(State):
 
-    def enter(self) -> 'State':
-        if self._instance is None:
-            self._instance = AwaitingCombination()
+    def enter() -> 'State':
+        if AwaitingCombination._instance is None:
+            AwaitingCombination._instance = AwaitingCombination()
 
-        return self._instance
+        return AwaitingCombination._instance
 
-    def combination(self) -> 'State':
+    def combination() -> 'State':
         return Closed.enter()
 
-    def error(self) -> 'State':
+    def error() -> 'State':
         return Locked.enter()
 
-    def close(self) -> 'State':
+    def close() -> 'State':
         pass
 
-    def lock(self) -> 'State':
+    def lock() -> 'State':
         pass
 
-    def open(self) -> 'State':
+    def open() -> 'State':
         pass
 
-    def unlock(self) -> 'State':
+    def unlock() -> 'State':
         pass
 
 
 class Closed(State):
 
-    def enter(self) -> 'State':
-        if self._instance is None:
-            self._instance = Closed()
+    def enter() -> 'State':
+        if Closed._instance is None:
+            Closed._instance = Closed()
 
-        return self._instance
+        return Closed._instance
 
-    def combination(self) -> 'State':
+    def combination() -> 'State':
         pass
 
-    def error(self) -> 'State':
+    def error() -> 'State':
         pass
 
-    def close(self) -> 'State':
+    def close() -> 'State':
         pass
 
-    def lock(self) -> 'State':
+    def lock() -> 'State':
         return Locked.enter()
 
-    def open(self) -> 'State':
+    def open() -> 'State':
         return Opened.enter()
 
-    def unlock(self) -> 'State':
+    def unlock() -> 'State':
         pass
 
 
 class Locked(State):
 
-    def enter(self) -> 'State':
-        if self._instance is None:
-            self._instance = Locked()
+    def enter() -> 'State':
+        if Locked._instance is None:
+            Locked._instance = Locked()
 
-        return self._instance
+        return Locked._instance
 
-    def combination(self) -> 'State':
+    def combination() -> 'State':
         pass
 
-    def error(self) -> 'State':
+    def error() -> 'State':
         pass
 
-    def close(self) -> 'State':
+    def close() -> 'State':
         pass
 
-    def lock(self) -> 'State':
+    def lock() -> 'State':
         pass
 
-    def open(self) -> 'State':
+    def open() -> 'State':
         pass
 
-    def unlock(self) -> 'State':
+    def unlock() -> 'State':
         return AwaitingCombination.enter()
 
 
 class Opened(State):
 
-    def enter(self) -> 'State':
-        if self._instance is None:
-            self._instance = Opened()
+    def enter() -> 'State':
+        if Opened._instance is None:
+            Opened._instance = Opened()
 
-        return self._instance
+        return Opened._instance
 
-    def combination(self) -> 'State':
+    def combination() -> 'State':
         return Closed.enter()
 
-    def error(self) -> 'State':
+    def error() -> 'State':
         pass
 
-    def close(self) -> 'State':
+    def close() -> 'State':
         return Closed.enter()
 
-    def lock(self) -> 'State':
+    def lock() -> 'State':
         pass
 
-    def open(self) -> 'State':
+    def open() -> 'State':
         pass
 
-    def unlock(self) -> 'State':
+    def unlock() -> 'State':
         pass
 
 
