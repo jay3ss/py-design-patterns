@@ -30,12 +30,12 @@ class DirectoryListing:
             self._files = sorted([file for file in self._dir.iterdir()])
 
 
-    @staticmethod
-    def create_directory_listing(path: str) -> 'DirectoryListing':
-        dl = DirectoryListing._pool.get(path)
+    @classmethod
+    def create_directory_listing(cls, path: str) -> 'DirectoryListing':
+        dl = cls._pool.get(path)
 
         if dl is None:
             dl = DirectoryListing(path)
-            DirectoryListing._pool[path] = dl
+            cls._pool[path] = dl
 
         return dl
