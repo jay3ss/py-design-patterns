@@ -8,6 +8,8 @@ help:
 	@echo "		intialize the project for development"
 	@echo "make clean"
 	@echo "		remove python artifacts"
+	@echo "make test"
+	@echo "		run tests"
 
 clean: clean-build clean-pyc clean-test ## remove all build, test, coverage and Python artifacts
 
